@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FindMyDog - Détails du signalement</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <link th:href="@{/css/dark-theme.css}" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidenav">
+        <div class="logo-container">
+            <img th:src="@{/images/paw-print-svgrepo-com.svg}" alt="Logo FindMyDog" class="logo-img">
+        </div>
+        <div class="nav-links">
+            <a th:href="@{/reports/list}" title="Liste des Signalements"><i class="bi bi-list-ul"></i></a>
+            <a th:href="@{/reports/add}" title="Nouveau Signalement"><i class="bi bi-plus-circle"></i></a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container-fluid">
+            <!-- Bouton retour -->
+            <div class="row mb-4">
+                <div class="col">
+                    <a th:href="@{/reports/list}" class="btn btn-outline-primary">
+                        <i class="bi bi-arrow-left"></i> Retour à la liste
+                    </a>
+                </div>
+            </div>
+
+            <!-- Détails du chien -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <img th:if="${report.photoPath}" th:src="@{${report.photoPath}}" alt="Photo du chien" class="card-img-top detail-img">
+                        <div class="card-body">
+                            <span th:text="${report.status}" th:class="${report.status == 'Perdu' ? 'badge bg-danger rounded-pill mb-3' : 'badge bg-success rounded-pill mb-3'}"></span>
+                            <h1 th:text="${report.dog.name}" class="card-title mb-4"></h1>
+                            
+                            <h5 class="text-muted mb-3">Informations générales</h5>
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <i class="bi bi-tag"></i> Race: <span th:text="${report.dog.breed}"></span>
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-geo-alt"></i> Localisation: <span th:text="${report.location}"></span>
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-calendar3"></i> Date de signalement: <span th:text="${#dates.format(report.date, 'dd/MM/yyyy')}"></span>
+                                </li>
+                            </ul>
+
+                            <h5 class="text-muted mb-3">Description</h5>
+                            <p th:text="${report.dog.description}" class="card-text"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Contact</h5>
+                            <form th:action="@{/reports/{id}/comment(id=${report.id})}" method="POST" class="needs-validation" novalidate>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Votre nom</label>
+                                    <input type="text" class="form-control" id="name" name="authorName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Votre email</label>
+                                    <input type="email" class="form-control" id="email" name="authorEmail" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">Votre téléphone</label>
+                                    <input type="tel" class="form-control" id="phone" name="authorPhone" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Votre message</label>
+                                    <textarea class="form-control" id="message" name="content" rows="5" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">
+                                    Envoyer le message
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section des commentaires -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Commentaires</h5>
+                            
+                            <div th:if="${#lists.isEmpty(report.comments)}" class="alert alert-info">
+                                Aucun commentaire pour le moment.
+                            </div>
+                            
+                            <div th:each="comment : ${report.comments}" class="comment-card mb-3">
+                                <div class="d-flex justify-content-between">
+                                    <h6 th:text="${comment.authorName}" class="mb-1"></h6>
+                                    <small th:text="${#dates.format(comment.date, 'dd/MM/yyyy HH:mm')}"></small>
+                                </div>
+                                <p th:text="${comment.content}" class="mb-0"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script th:src="@{/js/signalement-detail.js}"></script>
+</body>
+</html> 

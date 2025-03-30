@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FindMyDog - Nouveau Signalement</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <link th:href="@{/css/dark-theme.css}" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidenav">
+        <div class="logo-container">
+            <img th:src="@{/images/paw-print-svgrepo-com.svg}" alt="Logo FindMyDog" class="logo-img">
+        </div>
+        <div class="nav-links">
+            <a th:href="@{/reports/list}" title="Liste des Signalements"><i class="bi bi-list-ul"></i></a>
+            <a th:href="@{/reports/add}" title="Nouveau Signalement"><i class="bi bi-plus-circle"></i></a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container-fluid">
+            <div class="row mb-4">
+                <div class="col">
+                    <h1 class="display-4">Nouveau Signalement</h1>
+                    <p class="lead">Aidez-nous à retrouver votre compagnon</p>
+                </div>
+            </div>
+
+            <!-- Formulaire -->
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <form id="dog-form" th:action="@{/reports/save}" method="POST" class="needs-validation" th:object="${report}" novalidate enctype="multipart/form-data">
+                                <!-- Informations sur le chien -->
+                                <h5 class="card-title mb-4">Informations sur le chien</h5>
+                                
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="nom" class="form-label">Nom du chien</label>
+                                        <input type="text" class="form-control" id="nom" name="dogName" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="race" class="form-label">Race</label>
+                                        <input type="text" class="form-control" id="race" name="dogBreed" required>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="age" class="form-label">Âge approximatif</label>
+                                        <input type="number" class="form-control" id="age" name="dogAge" min="0" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="taille" class="form-label">Taille</label>
+                                        <select class="form-select" id="taille" name="dogSize" required>
+                                            <option value="">Sélectionnez une taille</option>
+                                            <option value="petit">Petit (0-30cm)</option>
+                                            <option value="moyen">Moyen (30-50cm)</option>
+                                            <option value="grand">Grand (50cm+)</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="couleur" class="form-label">Couleur(s)</label>
+                                    <input type="text" class="form-control" id="couleur" name="dogColor" placeholder="Ex: Noir et blanc, Marron" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Description détaillée</label>
+                                    <textarea class="form-control" id="description" name="dogDescription" rows="4" required 
+                                              placeholder="Décrivez les caractéristiques distinctives de votre chien (marques, tatouages, collier, etc.)"></textarea>
+                                </div>
+
+                                <!-- Champ caché pour l'ID du chien -->
+                                <input type="hidden" name="dog" id="dogId" value="0">
+
+                                <!-- Informations sur la perte/trouvaille -->
+                                <h5 class="card-title mb-4 mt-5">Informations sur la perte/trouvaille</h5>
+                                
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="statut" class="form-label">Statut</label>
+                                        <select class="form-select" id="statut" name="status" required>
+                                            <option value="">Sélectionnez un statut</option>
+                                            <option value="Perdu">Perdu</option>
+                                            <option value="Trouvé">Trouvé</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="date" class="form-label">Date</label>
+                                        <input type="date" class="form-control" id="date" name="date" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="localisation" class="form-label">Localisation</label>
+                                    <input type="text" class="form-control" id="localisation" name="location"
+                                           placeholder="Ex: Paris, 75011 - Rue de la Paix" required>
+                                </div>
+
+                                <!-- Photo -->
+                                <h5 class="card-title mb-4 mt-5">Photo</h5>
+                                
+                                <div class="mb-3">
+                                    <label for="photo" class="form-label">Photo du chien</label>
+                                    <input type="file" class="form-control" id="photo" name="photoFile" accept="image/*" required>
+                                    <div class="form-text">Format accepté : JPG, PNG. Taille maximale : 5MB</div>
+                                </div>
+
+                                <!-- Informations de contact -->
+                                <h5 class="card-title mb-4 mt-5">Vos coordonnées</h5>
+                                
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="nom_contact" class="form-label">Votre nom</label>
+                                        <input type="text" class="form-control" id="nom_contact" name="contactName" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="email" name="contactEmail" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="telephone" class="form-label">Téléphone</label>
+                                    <input type="tel" class="form-control" id="telephone" name="contactPhone" required>
+                                </div>
+
+                                <!-- Boutons -->
+                                <div class="d-flex gap-3 mt-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="bi bi-check-circle"></i> Publier le signalement
+                                    </button>
+                                    <a th:href="@{/reports/list}" class="btn btn-outline-secondary">
+                                        <i class="bi bi-x-circle"></i> Annuler
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aide -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Conseils pour un bon signalement</h5>
+                            <ul class="list-unstyled">
+                                <li class="mb-3">
+                                    <i class="bi bi-check-circle-fill text-success"></i>
+                                    Fournissez une photo claire et récente
+                                </li>
+                                <li class="mb-3">
+                                    <i class="bi bi-check-circle-fill text-success"></i>
+                                    Décrivez précisément les caractéristiques distinctives
+                                </li>
+                                <li class="mb-3">
+                                    <i class="bi bi-check-circle-fill text-success"></i>
+                                    Indiquez la localisation exacte
+                                </li>
+                                <li class="mb-3">
+                                    <i class="bi bi-check-circle-fill text-success"></i>
+                                    Gardez vos coordonnées à jour
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script th:src="@{/js/ajouter_signalement.js}"></script>
+</body>
+</html>

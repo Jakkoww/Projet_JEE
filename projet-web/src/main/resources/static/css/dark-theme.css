@@ -1,0 +1,197 @@
+/* Variables pour le thème sombre */
+:root {
+    --dark-bg: #1a1a1a;
+    --dark-card: #2d2d2d;
+    --dark-text: #e0e0e0;
+    --dark-text-muted: #a0a0a0;
+    --dark-border: #404040;
+    --dark-hover: #3d3d3d;
+    --dark-primary: #4a90e2;
+    --dark-primary-hover: #357abd;
+    --dark-success: #2ecc71;
+    --dark-danger: #e74c3c;
+}
+
+/* Styles généraux */
+body {
+    background-color: var(--dark-bg);
+    color: var(--dark-text);
+}
+
+/* Sidebar */
+.sidenav {
+    background-color: var(--dark-card);
+    border-right: 1px solid var(--dark-border);
+}
+
+.nav-links a {
+    color: var(--dark-text);
+}
+
+.nav-links a:hover {
+    color: var(--dark-primary);
+    background-color: var(--dark-hover);
+}
+
+/* Cards */
+.card {
+    background-color: var(--dark-card);
+    border: 1px solid var(--dark-border);
+    color: var(--dark-text);
+}
+
+.card-title {
+    color: var(--dark-text);
+}
+
+.card-text {
+    color: var(--dark-text-muted);
+}
+
+/* Formulaires */
+.form-control, .form-select {
+    background-color: var(--dark-bg);
+    border-color: var(--dark-border);
+    color: var(--dark-text);
+}
+
+.form-control:focus, .form-select:focus {
+    background-color: var(--dark-bg);
+    border-color: var(--dark-primary);
+    color: var(--dark-text);
+    box-shadow: 0 0 0 0.25rem rgba(74, 144, 226, 0.25);
+}
+
+.form-control::placeholder {
+    color: var(--dark-text-muted);
+}
+
+.form-label {
+    color: var(--dark-text);
+}
+
+.form-text {
+    color: var(--dark-text-muted);
+}
+
+/* Boutons */
+.btn-primary {
+    background-color: var(--dark-primary);
+    border-color: var(--dark-primary);
+}
+
+.btn-primary:hover {
+    background-color: var(--dark-primary-hover);
+    border-color: var(--dark-primary-hover);
+}
+
+.btn-outline-secondary {
+    color: var(--dark-text);
+    border-color: var(--dark-border);
+}
+
+.btn-outline-secondary:hover {
+    background-color: var(--dark-hover);
+    border-color: var(--dark-border);
+    color: var(--dark-text);
+}
+
+/* Badges */
+.badge {
+    background-color: var(--dark-primary);
+}
+
+/* Alertes */
+.alert {
+    background-color: var(--dark-card);
+    border-color: var(--dark-border);
+    color: var(--dark-text);
+}
+
+.alert-info {
+    background-color: rgba(74, 144, 226, 0.1);
+    border-color: var(--dark-primary);
+}
+
+/* Status des chiens */
+.card-status {
+    background-color: var(--dark-danger);
+}
+
+.card-status.found {
+    background-color: var(--dark-success);
+}
+
+/* Hover sur les cartes */
+.dog-card:hover {
+    box-shadow: 0 0 15px rgba(74, 144, 226, 0.2);
+}
+
+/* Validation des formulaires */
+.was-validated .form-control:valid,
+.was-validated .form-select:valid {
+    background-color: var(--dark-bg);
+    border-color: var(--dark-success);
+}
+
+.was-validated .form-control:invalid,
+.was-validated .form-select:invalid {
+    background-color: var(--dark-bg);
+    border-color: var(--dark-danger);
+}
+
+/* Scrollbar personnalisée */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--dark-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--dark-border);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--dark-hover);
+}
+
+/* Styles spécifiques pour la page de détails */
+.detail-img {
+    max-height: 400px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--dark-border);
+}
+
+.text-muted {
+    color: var(--dark-text-muted) !important;
+}
+
+.list-unstyled li {
+    color: var(--dark-text);
+}
+
+.list-unstyled li i {
+    color: var(--dark-primary);
+    margin-right: 8px;
+}
+
+/* Ajustements pour les titres */
+.display-4 {
+    color: var(--dark-text);
+}
+
+.lead {
+    color: var(--dark-text-muted);
+}
+
+/* Ajustements pour les liens */
+a {
+    color: var(--dark-primary);
+}
+
+a:hover {
+    color: var(--dark-primary-hover);
+} 
