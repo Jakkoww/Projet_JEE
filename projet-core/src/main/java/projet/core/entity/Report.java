@@ -16,7 +16,7 @@ public class Report extends GenericEntity{
     private LocalDate reportDate;
     private enum Status {Lost, Found}
 
-    protected Report() {
+    public Report() {
     }
 
     public Report(String reporterName, String phone, String email, String location, String description, LocalDate reportDate, Dog dog, List<Comment> comments) {

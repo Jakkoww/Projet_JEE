@@ -13,7 +13,6 @@
         <module>projet-core</module>
         <module>projet-data</module>
         <module>projet-web</module>
-        <module>projet-data</module>
 
     </modules>
 
@@ -39,6 +38,10 @@
             <artifactId>projet-core</artifactId>
             <version>2025</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
     </dependencies>
 
