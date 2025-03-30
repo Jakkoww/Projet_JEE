@@ -1,0 +1,13 @@
+version: '8.4'
+
+services:
+
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: javaee-mysql
+    ports:
+      - "3306:3306"
