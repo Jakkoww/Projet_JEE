@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>projet</groupId>
-        <artifactId>projet_JEE</artifactId>
+        <artifactId>projet</artifactId>
         <version>2025</version>
     </parent>
 
